@@ -1,22 +1,21 @@
 #!/bin/sh
 
-# Set root as working directory
-SCRIPT=$(readlink -f "$0")
-DIR=$(dirname "$SCRIPT")
-cd "$DIR/../../"
+# Start container if not running
+./app up --no-recreate --detach
 
 # Stash working directory
 git stash -q --keep-index
 
-# Test + lint
-composer test
-test_result=$?
+# Test, lint, analyze
+verify() {
+    ./app composer test || return $?
+    ./app composer lint || return $?
+    ./app composer analyze || return $?
+}
 
-composer lint
-lint_result=$?
+verify; result=$?
 
-# Apply stash
+# Re-apply stash
 git stash pop -q
 
-# Exit with test result
-exit $(($test_result + $lint_result))
+exit $result
