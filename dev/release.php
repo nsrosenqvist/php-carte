@@ -18,6 +18,12 @@ $app = new App();
 $root = dirname(__DIR__);
 chdir($root);
 
+if (getcwd() === '/app') {
+    $app->printer->error('Release script must be run from host machine');
+    $app->printer->newline();
+    exit(1);
+}
+
 // Run a verification step
 function step(string $message, string $command, string $failure): void
 {
