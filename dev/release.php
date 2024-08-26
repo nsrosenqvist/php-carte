@@ -27,7 +27,7 @@ if (getcwd() === '/app') {
 /**
  * Run a release verification step
  */
-function step(string $message, string $command, string $failure): void
+function verify(string $message, string $command, string $failure): void
 {
     global $app;
 
@@ -105,21 +105,21 @@ $app->registerCommand('default', static function (CommandCall $input) use ($app,
     $app->printer->newline();
 
     // Tests
-    step(
+    verify(
         'Verify code is passing tests',
         './app composer test',
         'Tests failed! Run step independently and review errors',
     );
 
     // Lint
-    step(
+    verify(
         'Verify code is adhering to standards',
         './app composer lint',
         'Linting failed! Run lint independently and review errors',
     );
 
     // Static analysis
-    step(
+    verify(
         'Verify code is passing static analysis',
         './app composer analyze',
         'Static analysis failed! Run step independently and review errors',
