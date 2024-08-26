@@ -4,7 +4,7 @@
 docker compose up --no-recreate --detach
 
 # Stash working directory
-stash=[ $(git status --porcelain=1 | wc -l) -ne 0 ]
+[ $(git status --porcelain=1 | wc -l) -ne 0 ] && stash=true || stash=false
 
 if $stash; then
     git stash -q --keep-index
