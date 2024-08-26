@@ -307,7 +307,7 @@ In order to minimize required configuration, some alternative syntaxes are also 
 }
 ```
 
-###### REST syntax
+##### REST syntax
 
 The REST syntax allows one to define responses according to HTTP method (the method will be expanded into `match->method`, like a regular method match). This syntax also supports short syntax definitions.
 
