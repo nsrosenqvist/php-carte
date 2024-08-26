@@ -1,21 +1,27 @@
 #!/bin/sh
 
 # Start container if not running
-./app up --no-recreate --detach
+docker compose up --no-recreate --detach
 
 # Stash working directory
-git stash -q --keep-index
+stash=[ $(git status --porcelain=1 | wc -l) -ne 0 ]
+
+if $stash; then
+    git stash -q --keep-index
+fi
 
 # Test, lint, analyze
 verify() {
-    ./app composer test || return $?
-    ./app composer lint || return $?
-    ./app composer analyze || return $?
+    docker compose exec -T app composer test || return $?
+    docker compose exec -T app composer lint || return $?
+    docker compose exec -T app composer analyze || return $?
 }
 
 verify; result=$?
 
 # Re-apply stash
-git stash pop -q
+if $stash; then
+    git stash pop -q
+fi
 
 exit $result
