@@ -18,6 +18,25 @@ $app = new App();
 $root = dirname(__DIR__);
 chdir($root);
 
+// Run a verification step
+function step(string $message, string $command, string $failure): void
+{
+    global $app;
+
+    $app->printer->out("{$message} ... ", 'dim');
+    exec("{$command} 2> /dev/null", $output, $result);
+
+    if ($result > 0) {
+        $app->printer->out('X', 'error');
+        $app->printer->newline();
+        $app->printer->error(" {$failure} ", true);
+        exit(3);
+    }
+
+    $app->printer->out('✔', 'success');
+    $app->printer->newline();
+}
+
 $app->registerCommand('default', static function (CommandCall $input) use ($app, $root): void {
     $version = trim(file_get_contents("{$root}/VERSION"));
     $composer = json_decode(file_get_contents("{$root}/composer.json"));
@@ -77,33 +96,26 @@ $app->registerCommand('default', static function (CommandCall $input) use ($app,
     $app->printer->newline();
     $app->printer->newline();
 
+    // Tests
+    step(
+        'Verify code is passing tests',
+        './app composer test',
+        'Tests failed! Run step independently and review errors',
+    );
+
     // Lint
-    $app->printer->out('Verify code is adhering to standards ... ', 'dim');
-    exec('composer lint 2> /dev/null', $output, $result);
+    step(
+        'Verify code is adhering to standards',
+        './app composer lint',
+        'Linting failed! Run lint independently and review errors',
+    );
 
-    if ($result > 0) {
-        $app->printer->out('X', 'error');
-        $app->printer->newline();
-        $app->printer->error(' Linting failed! Run lint independently and review errors ', true);
-        exit(3);
-    }
-
-    $app->printer->out('✔', 'success');
-    $app->printer->newline();
-
-    // Run tests
-    $app->printer->out('Verify code is passing tests ... ', 'dim');
-    exec('composer test 2> /dev/null', $output, $result);
-
-    if ($result > 0) {
-        $app->printer->out('X', 'error');
-        $app->printer->newline();
-        $app->printer->error(' Tests failed! Run tests independently and review errors ', true);
-        exit(3);
-    }
-
-    $app->printer->out('✔', 'success');
-    $app->printer->newline();
+    // Static analysis
+    step(
+        'Verify code is passing static analysis',
+        './app composer analyze',
+        'Static analysis failed! Run step independently and review errors',
+    );
 
     // Update VERSION
     $app->printer->out('Writing to VERSION ... ', 'dim');
