@@ -43,8 +43,8 @@ contact:
     match:
       method: GET
 subscribers:
-    strategy: auth
-    body: 'Thank you!'
+  strategy: auth
+  body: 'Thank you!'
 ```
 
 > [!NOTE]  
