@@ -1,8 +1,19 @@
 {
     "name": "nsrosenqvist/carte",
     "license": "MIT",
-    "description": "A PSR-15, PSR-7 and PSR-17 compatible manifest-based router for PHP",
+    "description": "A declarative PSR-15 router based on the PSR-7 and PSR-17 standards",
     "homepage": "https://github.com/nsrosenqvist/php-carte",
+    "keywords": [
+        "router",
+        "psr-15",
+        "psr-7",
+        "psr-17",
+        "http",
+        "middleware",
+        "manifest",
+        "yaml",
+        "json"
+    ],
     "authors": [
         {
             "name": "Niklas Rosenqvist",
