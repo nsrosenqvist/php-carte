@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: ./dev/runtime
+      dockerfile: Dockerfile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ".:/app"
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge

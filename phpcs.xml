@@ -1,0 +1,44 @@
+<ruleset name="PHP_CodeSniffer">
+   <description>Code standard</description>
+
+   <!-- Config -->
+   <arg value="np"/>
+
+   <file>src</file>
+   <file>tests</file>
+   <exclude-pattern>*/vendor/*</exclude-pattern>
+
+   <!-- General rule set -->
+   <rule ref="PSR12"/>
+
+   <!-- Target PHP Version -->
+   <rule ref="PHPCompatibility">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+   </rule>
+   <config name="testVersion" value="8.3-"/>
+
+    <!-- Include the Doctrine Coding Standard -->
+    <rule ref="Doctrine">
+          <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>
+          <exclude name="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing.IncorrectLinesCountBeforeControlStructure"/>
+          <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat"/>
+          <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.MissingVariable"/>
+          <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.UselessElseIf"/>
+          <exclude name="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn.UselessIfCondition"/>
+          <exclude name="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion.RequiredConstructorPropertyPromotion"/>
+          <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion"/>
+          <exclude name="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat.DisallowedShortNullable"/>
+          <exclude name="SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses"/>
+          <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName"/>
+          <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>
+          <exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming.SuperfluousSuffix"/>
+          <exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming.SuperfluousSuffix"/>
+          <exclude name="SlevomatCodingStandard.Namespaces.UseFromSameNamespace.UseFromSameNamespace"/>
+          <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+          <exclude name="SlevomatCodingStandard.ControlStructures.AssignmentInCondition.AssignmentInCondition"/>
+          <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed"/>
+          <exclude name="SlevomatCodingStandard.Commenting.RequireOneLineDocComment.MultiLineDocComment"/>
+          <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
+          <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName"/>
+     </rule>
+</ruleset>

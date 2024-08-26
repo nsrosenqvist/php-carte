@@ -1,0 +1,17 @@
+parameters:
+    phpVersion: 80302
+    level: 9
+    editorUrl: 'vscode://file/%%file%%#%%line%%'
+    editorUrlTitle: 'vscode://file/%%file%%#%%line%%'
+    tipsOfTheDay: false
+    paths:
+        - src
+    scanDirectories:
+        - vendor
+    fileExtensions:
+        - php
+    parallel:
+        processTimeout: 1200.0
+    ignoreErrors:
+        - '#^Unsafe usage of new static\(\)\.$#'
+        - '#^Static call to instance method CastToType\:\:\w+\(\)\.$#'

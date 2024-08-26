@@ -1,0 +1,39 @@
+/:
+  body: 'index'
+/blog:
+  routes:
+    index: 'blog:index'
+    home: 'blog:home'
+    about: 'blog:about'
+    contact: 'blog:contact'
+archive:
+  routes:
+    lorem/ipsum/{id}:
+      - body: 'archive:1'
+        match:
+          id: 1
+      - body: 'archive:1:query'
+        match:
+          id: 1
+          query:
+            foo: bar
+      - body: 'archive:2'
+        match:
+          id: 2
+    lorem/ipsum/3: 'archive:3'
+    lorem/ipsum/*: 404
+contact:
+  - body: 'contact:post'
+    match:
+      method: POST
+  - body: 'contact:get'
+    match:
+      method: GET
+resolver/redirect:
+  body: 'redirect://blog/home'
+resolver/php:
+  body: 'php://handler.php'
+resolver/stream:
+  body: 'stream://plain.txt'
+resolver/file:
+  body: 'file://json.json'
