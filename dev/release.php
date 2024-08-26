@@ -24,7 +24,9 @@ if (getcwd() === '/app') {
     exit(1);
 }
 
-// Run a verification step
+/**
+ * Run a release verification step
+ */
 function step(string $message, string $command, string $failure): void
 {
     global $app;

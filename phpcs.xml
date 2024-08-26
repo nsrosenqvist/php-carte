@@ -19,6 +19,7 @@
 
     <!-- Include the Doctrine Coding Standard -->
     <rule ref="Doctrine">
+          <exclude name="Squiz.PHP.GlobalKeyword"/>
           <exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit.EarlyExitNotUsed"/>
           <exclude name="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing.IncorrectLinesCountBeforeControlStructure"/>
           <exclude name="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.InvalidFormat"/>
